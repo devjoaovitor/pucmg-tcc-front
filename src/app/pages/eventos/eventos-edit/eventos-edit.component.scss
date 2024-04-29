@@ -1,0 +1,76 @@
+.container{
+  margin-top: 5%;
+}
+
+#evento-card {
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.evento-button {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    background-color: #8C52FF;
+    color: #fff;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.alert-sucesso{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.card-title{
+  font-size: 20px;
+  font-weight: bold;
+  color: #8C52FF;
+  margin-bottom: 10%;
+}
+
+.bebida-title{
+  font-size: 20px;
+  font-weight: bold;
+  color: #8C52FF;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.text-danger {
+  color: #8C52FF !important;
+}
+
+.adicionar-bebida-button {
+  margin-top: 10px;
+}
+
+.remover-bebida-button {
+  margin-top: 10px;
+}
+
+.btn-sm{
+  margin-left: 10px;
+  min-width: 30px;
+  min-height: 30px;
+  background-color: #8C52FF;
+  color: #fff;
+  border-color: #8C52FF;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 22px;
+}

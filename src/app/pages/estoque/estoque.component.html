@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="card" id="bebida-card">
+        <div class="card-body">
+          <div>
+          <h5 class="card-title">Bebidas no estoque</h5>
+          <div class="relatorio-group">
+            <button class="btn btn-relatorio" (click)="gerarRelatorio()">
+              Gerar relatório
+            </button>
+          </div>
+         </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Descrição</th>
+                <th *ngIf="administrador()" scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bebida of bebidas">
+                <td>{{ bebida.nomebebida }}</td>
+                <td>{{ bebida.quantidadebebida }}</td>
+                <td>{{ bebida.descricao }}</td>
+                <td>
+                  <div *ngIf="administrador()" class="button-group">
+                    <button
+                      class="btn btn-edit"
+                      (click)="editarBebida(bebida.id)"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      class="btn btn-delete"
+                      (click)="openDialog(bebida.id)"
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>
+

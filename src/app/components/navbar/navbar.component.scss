@@ -1,0 +1,33 @@
+.custom-border-bottom {
+  border-bottom: 1px solid #8c52ff;
+}
+
+.dropdown-button {
+  display: flex;
+  gap: 1em;
+  .last-button {
+    margin-left: 50px;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.btn-color {
+  background-color: #8c52ff;
+  color: #fff;
+}
+
+.dropdown-menu {
+  background-color: #fff;
+}
+
+.dropdown-item {
+  color: #8c52ff;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #8c52ff;
+  color: #fff;
+}

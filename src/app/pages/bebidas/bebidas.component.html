@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="bebida-card">
+        <div class="card-body">
+          <h5 class="card-title">Nova bebida</h5>
+          <form [formGroup]="bebidaForm" (ngSubmit)="salvarBebida()">
+            <div class="form-group">
+              <label for="nomeBebida">Nome da bebida</label>
+              <input type="text" formControlName="nomeBebida" class="form-control" id="nomeBebida" placeholder="Nome do Bebida">
+              <small *ngIf="nomeBebida?.invalid && (nomeBebida?.dirty || nomeBebida?.touched)" class="text-danger">Nome é obrigatório.</small>
+            </div>
+            <div class="form-group">
+              <label for="tipoBebida">Tipo da bebida</label>
+              <select class="form-select" aria-label="Default select example" formControlName="tipoBebida">
+                <option value="" disabled selected>Selecione o tipo de bebida</option>
+                <option value="1">Alcoólica</option>
+                <option value="2">Não-alcoólica</option>
+              </select>
+              <small *ngIf="tipoBebida?.invalid && (tipoBebida?.dirty || tipoBebida?.touched)" class="text-danger">Tipo de bebida é obrigatório.</small>
+            </div>
+            <div class="form-group" *ngIf="bebidaForm.get('tipoBebida')?.value === '1'">
+              <label for="teorAlcoolico">Teor alcoólico (%)</label>
+              <input type="number" formControlName="teorAlcoolico" class="form-control" id="teorAlcoolico" (input)="limitarValor($event)" min="0" max="100">
+              <small *ngIf="teorAlcoolico?.invalid && (teorAlcoolico?.dirty || teorAlcoolico?.touched)" class="text-danger">Teor alcoólico deve estar entre 0 e 100%.</small>
+            </div>
+            <div class="form-group">
+              <label for="valorUnitario">Valor unitário (R$)</label>
+              <input type="number" formControlName="valorUnitario" class="form-control" id="valorUnitario" placeholder="Valor unitário (R$)">
+              <small *ngIf="valorUnitario?.invalid && (valorUnitario?.dirty || valorUnitario?.touched)" class="text-danger">Valor unitário é obrigatório.</small>
+            </div>
+            <div class="form-group">
+              <label for="quantidadeBebida">Quantidade</label>
+              <input type="number" formControlName="quantidadeBebida" class="form-control" id="quantidadeBebida" placeholder="Quantidade">
+              <small *ngIf="quantidadeBebida?.invalid && (quantidadeBebida?.dirty || quantidadeBebida?.touched)" class="text-danger">Quantidade é obrigatória.</small>
+            </div>
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <textarea class="form-control" formControlName="descricao" id="descricao" rows="3"></textarea>
+              <small *ngIf="descricao?.invalid && (descricao?.dirty || descricao?.touched)" class="text-danger">Descrição é obrigatória.</small>
+            </div>
+            <div class="bebida-button">
+              <button type="submit" class="btn" [disabled]="bebidaForm.invalid">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

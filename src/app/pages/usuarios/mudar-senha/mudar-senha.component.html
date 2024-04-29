@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="registro-card">
+        <div class="card-body">
+          <form [formGroup]="cadastroForm" (ngSubmit)="alterarSenha()">
+            <div class="form-group">
+              <label for="novaSenha">Nova senha</label>
+              <input type="password" formControlName="novaSenha" class="form-control" id="novaSenha">
+              <small class="text-danger" *ngIf="cadastroForm.get('novaSenha')?.hasError('required') && cadastroForm.get('novaSenha')?.touched">
+                Nova senha é obrigatória
+              </small>
+              <small class="text-danger" *ngIf="cadastroForm.get('novaSenha')?.hasError('minlength') && cadastroForm.get('novaSenha')?.touched">
+                A nova senha deve ter no mínimo 6 caracteres
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmSenha">Confirmar nova senha</label>
+              <input type="password" formControlName="confirmSenha" class="form-control" id="confirmSenha">
+              <small class="text-danger" *ngIf="cadastroForm.hasError('senhaMismatch')">
+                As senhas não estão iguais.<br>
+              </small>
+              <small class="text-danger" *ngIf="cadastroForm.get('confirmSenha')?.hasError('required') && cadastroForm.get('confirmSenha')?.touched">
+                Confirmação de senha é obrigatória<br>
+              </small>
+              <small class="text-danger" *ngIf="cadastroForm.get('confirmSenha')?.hasError('minlength') && cadastroForm.get('confirmSenha')?.touched">
+                A confirmação de senha deve ter no mínimo 6 caracteres
+              </small>
+            </div>
+
+            <div class="registro-button">
+              <button type="submit" class="btn" [disabled]="cadastroForm.invalid">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

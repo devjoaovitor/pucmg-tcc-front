@@ -1,0 +1,51 @@
+.container{
+  margin-top: 180px;
+}
+
+#registro-card {
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.alert-sucesso{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.registro-button {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    background-color: #8C52FF;
+    color: #fff;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.reset-password{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 15px;
+  cursor: pointer;
+  color: #8C52FF;
+  text-decoration: underline;
+}
+
+.text-info{
+  color: #8C52FF !important;
+}
+
+.text-danger {
+  color: #8C52FF !important;
+}
+

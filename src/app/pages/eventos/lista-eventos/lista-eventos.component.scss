@@ -1,0 +1,78 @@
+.container{
+  margin-top: 5%;
+}
+
+#lista-evento-card {
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.lista-evento-button {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    background-color: #8C52FF;
+    color: #fff;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.card-title{
+  font-size: 20px;
+  font-weight: bold;
+  color: #8C52FF;
+}
+
+.button-group{
+  display: flex;
+}
+
+.relatorio-group{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 50px;
+  margin-top: -35px;
+}
+
+.btn-relatorio{
+  background-color: #8C52FF;
+  color: #fff;
+  min-width: 80px;
+  min-height: 35px;
+  margin-right: 5%;
+}
+
+.btn-edit{
+  background-color: #8C52FF;
+  color: #fff;
+  min-width: 80px;
+  min-height: 35px;
+  margin-right: 5%;
+}
+
+.btn-delete{
+  background-color: #8C52FF;
+  color: #fff;
+  min-width: 80px;
+  min-height: 35px;
+  margin-right: 5%;
+  margin-left: 8px;
+}
+
+.acoes-cell {
+  min-width: 205px; /* Altere o valor conforme necessário */
+}
+
+.text-danger {
+  color: #8C52FF !important;
+}

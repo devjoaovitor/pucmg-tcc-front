@@ -1,0 +1,65 @@
+.container{
+  margin-top: 5%;
+}
+
+#usuario-card {
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.usuario-button {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    background-color: #8C52FF;
+    color: #fff;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.card-title{
+  font-size: 20px;
+  font-weight: bold;
+  color: #8C52FF;
+  margin-bottom: 10%;
+}
+
+.alert-sucesso{
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.button-group{
+  display: flex;
+}
+
+.btn-edit{
+  background-color: #8C52FF;
+  color: #fff;
+  min-width: 80px;
+  min-height: 35px;
+  margin-right: 5%;
+}
+
+.btn-delete{
+  background-color: #8C52FF;
+  color: #fff;
+  min-width: 80px;
+  min-height: 35px;
+  margin-right: 5%;
+  margin-left: 8px;
+}
+
+.text-danger {
+  color: #8C52FF !important;
+}

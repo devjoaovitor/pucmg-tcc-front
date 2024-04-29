@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="card" id="lista-evento-card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de eventos</h5>
+          <div class="relatorio-group">
+            <button class="btn btn-relatorio" (click)="gerarRelatorio()">
+              Gerar relatório
+            </button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome do Evento</th>
+                <th scope="col">Data do Evento</th>
+                <th scope="col">Local do Evento</th>
+                <th scope="col">Bebidas / Quantidade</th>
+                <th *ngIf="administrador()" scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let evento of eventos">
+                <td>{{ evento.nome_evento }}</td>
+                <td>{{ formatarData(evento.data_evento) }}</td>
+                <td>{{ evento.local_evento }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let bebida of evento.bebidas">
+                      {{ bebida.nome }} - {{ bebida.quantidade }}
+                    </li>
+                  </ul>
+                </td>
+                <td *ngIf="administrador()" class="acoes-cell">
+                  <button class="btn btn-edit" (click)="editarEvento(evento.id)">
+                    Editar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="registro-card">
+        <div class="card-body">
+          <form [formGroup]="cadastroForm" (ngSubmit)="cadastrarUsuario()">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" formControlName="nome" class="form-control" id="nome" placeholder="Informe o nome">
+              <small *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)" class="text-danger">Nome é obrigatório.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" formControlName="email" class="form-control" id="email" placeholder="Informe o e-mail">
+              <small *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="text-danger">E-mail é obrigatório e deve ser válido.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="senha">Senha (gerada aleatoriamente)</label>
+              <input type="text" formControlName="senha" class="form-control" id="senha" [value]="senhaGerada" readonly>
+            </div>
+
+            <div class="form-group">
+              <label for="permissao">Tipo de Usuário</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="permissao" value="Administrador" id="permissaoADM">
+                <label class="form-check-label" for="permissaoADM">Administrador</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="permissao" value="Visualizacao" id="permissaoVisualizacao">
+                <label class="form-check-label" for="permissaoVisualizacao">Apenas visualização</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="permissao" value="Vendedor" id="permissaoVendedor">
+                <label class="form-check-label" for="tipoUsuarioVendedor">Vendedor</label>
+              </div>
+              <small *ngIf="permissao?.invalid && (permissao?.dirty || permissao?.touched)" class="text-danger">Selecione o tipo de usuário.</small>
+            </div>
+            <div class="registro-button">
+            <button type="submit" class="btn" [disabled]="cadastroForm.invalid">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

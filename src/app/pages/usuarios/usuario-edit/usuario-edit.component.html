@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="usuario-card">
+        <div class="card-body">
+          <h5 class="card-title">Editar usuário</h5>
+          <form [formGroup]="usuarioForm" (ngSubmit)="salvarEdicao()">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" formControlName="nome" class="form-control" id="nome">
+              <small *ngIf="usuarioForm.get('nome')?.invalid && (usuarioForm.get('nome')?.dirty || usuarioForm.get('nome')?.touched)" class="text-danger">Nome é obrigatório.</small>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" formControlName="email" class="form-control" id="email">
+              <small *ngIf="usuarioForm.get('email')?.invalid && (usuarioForm.get('email')?.dirty || usuarioForm.get('email')?.touched)" class="text-danger">E-mail é obrigatório e deve ser válido.</small>
+            </div>
+            <div class="form-group">
+              <label for="permissao">Perfil de Acesso</label>
+              <select formControlName="permissao" class="form-control" id="permissao">
+                <option value="" disabled selected>Selecione um perfil de acesso</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Vendedor">Vendedor</option>
+                <option value="Visualizacao">Visualização</option>
+              </select>
+              <small *ngIf="usuarioForm.get('permissao')?.invalid && (usuarioForm.get('permissao')?.dirty || usuarioForm.get('permissao')?.touched)" class="text-danger">Selecione o perfil de acesso.</small>
+            </div>
+            <div class="usuario-button">
+              <button type="submit" class="btn" [disabled]="usuarioForm.invalid">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

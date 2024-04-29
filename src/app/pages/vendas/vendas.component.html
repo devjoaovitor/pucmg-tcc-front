@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="vendas-card">
+        <div class="card-body">
+          <h5 class="card-title">Registrar Vendas</h5>
+          <form [formGroup]="vendasForm" (ngSubmit)="registrarVenda()">
+            <div class="mb-3">
+              <label for="evento" class="form-label">Eventos</label>
+              <select formControlName="evento" class="form-select" id="evento" >
+                <option value="" disabled selected>Selecione o evento</option>
+                <option *ngFor="let evento of eventosDisponiveis" [ngValue]="evento.id">{{ evento.nome_evento }}</option>
+              </select>
+              <small *ngIf="vendasForm.get('evento')?.errors?.['required'] && (vendasForm.get('evento')?.touched || vendasForm.get('evento')?.dirty)" class="text-danger">Selecione o evento.</small>
+            </div>
+            <div class="mb-3">
+              <label for="bebida" class="form-label">Bebida</label>
+              <select formControlName="bebida" class="form-select" id="bebida">
+                <option value="" disabled selected>Selecione uma bebida</option>
+                <option *ngFor="let bebida of bebidasDisponiveis" [ngValue]="bebida.nome">{{ bebida.nome }}</option>
+              </select>
+              <small *ngIf="vendasForm.get('bebida')?.errors?.['required'] && (vendasForm.get('bebida')?.touched || vendasForm.get('bebida')?.dirty)" class="text-danger">Selecione a bebida.</small>
+            </div>
+            <div class="mb-3">
+              <label for="quantidade" class="form-label">Quantidade</label>
+              <input type="number" formControlName="quantidade" class="form-control" id="quantidade" placeholder="Informe a quantidade" min="1" [max]="quantidadeMaxima">
+              <small *ngIf="vendasForm.get('quantidade')?.errors?.['required'] && (vendasForm.get('quantidade')?.dirty || vendasForm.get('quantidade')?.touched)" class="text-danger">Quantidade é obrigatória.</small>
+              <small *ngIf="vendasForm.get('quantidade')?.errors?.['max']" class="text-danger">A quantidade máxima é {{ quantidadeMaxima }}.</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Forma de Pagamento</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="formaPagamento" id="pix" value="pix">
+                <label class="form-check-label" for="pix">PIX</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="formaPagamento" id="cartaoCredito" value="cartao_credito">
+                <label class="form-check-label" for="cartaoCredito">Cartão de Crédito</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="formaPagamento" id="cartaoDebito" value="cartao_debito">
+                <label class="form-check-label" for="cartaoDebito">Cartão de Débito</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="formaPagamento" id="dinheiro" value="dinheiro">
+                <label class="form-check-label" for="dinheiro">Dinheiro</label>
+              </div>
+            </div>
+            <div class="vendas-button">
+            <button type="submit" class="btn" [disabled]="vendasForm.invalid">Registrar Venda</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" *ngIf="bebidasDisponiveis.length > 0 && vendasForm.get('evento')?.value">
+      <div class="card" id="estoque-card">
+        <div class="card-body">
+          <h5 class="card-title">Estoque disponível para o evento:</h5>
+              <ul>
+                <li *ngFor="let bebida of bebidasDisponiveis">
+                  {{ bebida.nome }} - Estoque: {{ bebida.quantidade }}
+                </li>
+              </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>
+
+
+
+
+

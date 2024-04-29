@@ -1,0 +1,36 @@
+.container{
+  margin-top: 5%;
+}
+
+#bebida-card {
+  padding: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.bebida-button {
+  display: flex;
+  flex-direction: row-reverse;
+
+  button {
+    background-color: #8C52FF;
+    color: #fff;
+    min-width: 80px;
+    min-height: 35px;
+  }
+}
+
+.card-title{
+  font-size: 20px;
+  font-weight: bold;
+  color: #8C52FF;
+  margin-bottom: 10%;
+}
+

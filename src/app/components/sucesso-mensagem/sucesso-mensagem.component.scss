@@ -1,0 +1,30 @@
+.success-message {
+  position: fixed;
+  top: 95px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #3adb5f;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  width: 350px;
+  height: 160px;
+  z-index: 2;
+}
+.success-icon {
+  margin-right: 10px;
+  font-size: 24px;
+  color: #28a745;
+}
+
+.success-text h4 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.success-text p {
+  margin: 0;
+}

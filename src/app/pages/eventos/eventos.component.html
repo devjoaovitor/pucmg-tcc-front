@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="evento-card">
+        <div class="card-body">
+          <h5 class="card-title">Novo Evento</h5>
+          <form [formGroup]="eventoForm">
+            <div class="form-group">
+              <label for="nomeEvento">Nome do Evento</label>
+              <input
+                type="text"
+                formControlName="nomeEvento"
+                class="form-control"
+                id="nomeEvento"
+                placeholder="Nome do Evento"
+              />
+              <small *ngIf="eventoForm.get('nomeEvento')?.hasError('required') && (eventoForm.get('nomeEvento')?.dirty || eventoForm.get('nomeEvento')?.touched)" class="text-danger">Nome é obrigatório.</small>
+            </div>
+            <div class="form-group">
+              <label for="dataEvento">Data do Evento</label>
+              <input
+                type="date"
+                formControlName="dataEvento"
+                class="form-control"
+                id="dataEvento"
+              />
+              <small *ngIf="eventoForm.get('dataEvento')?.hasError('required') && (eventoForm.get('dataEvento')?.dirty || eventoForm.get('dataEvento')?.touched)" class="text-danger">Data é obrigatório.</small>
+            </div>
+            <div class="form-group">
+              <label for="localEvento">Local do Evento</label>
+              <input
+                type="text"
+                formControlName="localEvento"
+                class="form-control"
+                id="localEvento"
+                placeholder="Local do Evento"
+              />
+              <small *ngIf="eventoForm.get('localEvento')?.hasError('required') && (eventoForm.get('localEvento')?.dirty || eventoForm.get('localEvento')?.touched)" class="text-danger">Local é obrigatório.</small>
+            </div>
+            <div class="event-button"></div>
+
+            <h5 class="card-title">Bebidas destinadas a esse evento</h5>
+            <div class="form-group">
+              <label for="bebidaSelecionada">Bebida Disponível</label>
+              <select formControlName="bebidaSelecionada" class="form-control" id="bebidaSelecionada" (change)="limparQuantidadeBebida()">
+                <option value="" disabled selected>Selecione uma bebida</option>
+                <option *ngFor="let bebida of bebidasDisponiveis" [value]="bebida.nomebebida">{{ bebida.nomebebida }}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidadeBebida">Quantidade</label>
+              <input
+                type="number"
+                formControlName="quantidadeBebida"
+                class="form-control"
+                id="quantidadeBebida"
+                placeholder="Quantidade"
+                [attr.max]="getQuantidadeMaxima()"
+                (input)="limitarQuantidade($event)"
+              />
+            </div>
+            <div class="drink-event-button">
+              <button type="button" class="btn" (click)="adicionarBebida()">
+                Adicionar Bebida
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" *ngIf="exibirResumoEvento()">
+      <div class="card" id="bebidas-card">
+        <div class="card-body">
+          <h5 class="card-title">Resumo do evento</h5>
+          <p>Nome do evento: {{ eventoForm.get("nomeEvento")?.value }}</p>
+          <p>Data: {{ formatarData(eventoForm.get("dataEvento")?.value) }}</p>
+          <p>Local: {{ eventoForm.get("localEvento")?.value }}</p>
+          <h6 class="bebidas-title">Bebidas Adicionadas</h6>
+          <p class="title-remove" *ngIf="bebidasDoEvento.length > 0">
+            Para remover um bebida, passe o mouse sobre a mesma e clique sobre o
+            botão.
+          </p>
+          <ul>
+            <li *ngFor="let bebida of bebidasDoEvento; let i = index">
+              <div class="bebida-info">
+                <span
+                  >{{ bebida.nome }} - Quantidade: {{ bebida.quantidade }}</span
+                >
+                <button
+                  class="btn btn-sm btn-remove"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="right"
+                  title="Ao clicar sobre o botão a bebida é removida da lista"
+                  (click)="removerBebida(i)"
+                >
+                  -
+                </button>
+              </div>
+            </li>
+          </ul>
+          <div class="drink-event-button">
+            <button type="submit" class="btn ml-auto" (click)="salvarEvento()" [disabled]="eventoForm.invalid || bebidasDoEvento.length < 1">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>

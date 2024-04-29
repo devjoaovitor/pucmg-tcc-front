@@ -1,0 +1,127 @@
+<nav *ngIf="isUserLoggedIn()" class="navbar navbar-light bg-light custom-border-bottom">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/home']">
+      <img src="assets/drink-icon.svg" alt="icone" width="50" height="50" />
+    </a>
+
+    <div class="dropdown-button">
+
+      <div class="dropdown">
+        <button
+          class="btn btn-color dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+         Vendas
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li *ngIf="administrador() || vendedor()">
+            <a class="dropdown-item" [routerLink]="['/vendas']"
+              >Iniciar vendas</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/lista-vendas']">Lista das vendas</a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="administrador()" class="dropdown">
+        <button
+          class="btn btn-color dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Usuarios
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <a class="dropdown-item" [routerLink]="['/lista-usuarios']"
+              >Lista de usuarios</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/cadastro-usuario']">Incluir novo usuario</a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="vendedor() || administrador() || visualizacao()" class="dropdown">
+        <button
+          class="btn btn-color dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Estoque
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <a class="dropdown-item" [routerLink]="['/estoque']"
+              >Verificar estoque</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div  *ngIf="administrador() || vendedor() || visualizacao()" class="dropdown">
+        <button
+          class="btn btn-color dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Eventos
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li *ngIf="administrador()">
+            <a class="dropdown-item" [routerLink]="['/eventos']">Novo evento</a>
+          </li>
+          <li *ngIf="administrador() || vendedor() || visualizacao()">
+            <a class="dropdown-item" [routerLink]="['/lista-eventos']">Lista de eventos</a>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="administrador()" class="dropdown">
+        <button
+          class="btn btn-color dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Bebidas
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li >
+            <a class="dropdown-item" [routerLink]="['/bebidas']">Nova bebida</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dropdown last-button">
+        <button
+          class="btn btn-color dropdown-toggle rounded-circle"
+          type="button"
+          id="perfilDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img src="assets/person.svg" alt="Imagem" width="30" height="30" class="rounded-circle">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
+          <li>
+            <a class="dropdown-item" (click)="mudarSenha()">Mudar Senha</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="openDialog()">Sair</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</nav>

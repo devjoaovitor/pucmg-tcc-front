@@ -1,0 +1,133 @@
+<app-navbar></app-navbar>
+<div class="alert-sucesso" *ngIf="mensagemDeSucesso">
+  <app-sucesso-mensagem [mensagem]="mensagemDeSucesso"></app-sucesso-mensagem>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card" id="evento-card">
+        <div class="card-body">
+          <h5 class="card-title">Editar evento</h5>
+          <form [formGroup]="eventoForm">
+            <div class="form-group">
+              <label for="nome_evento">Nome do Evento</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nome_evento"
+                formControlName="nome_evento"
+              />
+              <small
+                *ngIf="
+                  eventoForm.get('nome_evento')?.hasError('required') &&
+                  eventoForm.get('nome_evento')?.touched
+                "
+                class="text-danger"
+                >Nome do evento é obrigatório.</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="data_evento">Data do Evento</label>
+              <input
+                type="date"
+                class="form-control"
+                id="data_evento"
+                [value]="formatarData(eventoForm.get('data_evento')?.value)"
+                formControlName="data_evento"
+              />
+              <small
+                *ngIf="
+                  eventoForm.get('data_evento')?.hasError('required') &&
+                  eventoForm.get('data_evento')?.touched
+                "
+                class="text-danger"
+                >Data do evento é obrigatória.</small
+              >
+              <small
+                *ngIf="
+                  eventoForm.get('data_evento')?.hasError('pattern') &&
+                  eventoForm.get('data_evento')?.touched
+                "
+                class="text-danger"
+                >Formato da data inválido</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="local_evento">Local do Evento</label>
+              <input
+                type="text"
+                class="form-control"
+                id="local_evento"
+                formControlName="local_evento"
+              />
+              <small
+                *ngIf="
+                  eventoForm.get('local_evento')?.hasError('required') &&
+                  eventoForm.get('local_evento')?.touched
+                "
+                class="text-danger"
+                >Local do evento é obrigatório.</small
+              >
+            </div>
+
+            <div formArrayName="bebidas">
+              <h5 class="bebida-title">Bebidas</h5>
+              <div
+                *ngFor="let bebida of bebidas.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <div class="form-group">
+                  <label for="nomeBebida">Nome da Bebida</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nomeBebida"
+                    formControlName="nome"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="quantidadeBebida">Quantidade</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="quantidadeBebida"
+                    formControlName="quantidade"
+                  />
+                </div>
+                <div class="buttons">
+                  <button
+                    class="btn btn-sm"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Ao clicar sobre o botão a bebida é removida da lista"
+                    (click)="removerBebida(i)"
+                  >
+                    Remover
+                  </button>
+                  <button
+                    class="btn btn-sm"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Ao clicar sobre o botão será adicionado uma bebida a lista"
+                    (click)="adicionarBebida()"
+                  >
+                    Adicionar Bebida
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="evento-button">
+              <button type="submit" (click)="salvarEvento()" class="btn" [disabled]="eventoForm.invalid">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading [isLoading]="isLoading"></app-loading>
